@@ -1,0 +1,49 @@
+group 'github-fetcher'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'java'
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    options.encoding = "UTF-8"
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+ext {
+    jacksonVersion = '2.6.0-rc4'
+}
+
+dependencies {
+    compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "org.apache.httpcomponents:httpclient:4.5"
+    compile ("org.kohsuke:github-api:1.69") {
+        exclude module: "bridge-method-annotation"
+    }
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+    }
+}
+
+task run(type: JavaExec) {
+    if ( project.hasProperty("appArgs") ) {
+        args Eval.me(appArgs)
+    }
+    main = 'com.galiamov.GetMostUsers'
+    classpath = sourceSets.test.runtimeClasspath
+}

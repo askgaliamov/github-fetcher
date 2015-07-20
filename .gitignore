@@ -1,0 +1,22 @@
+*.class
+# Package Files #
+*.war 
+*.ear 
+log
+
+# IDE
+.idea/ 
+*.iml 
+.project 
+.classpath 
+.settings 
+*.out.xml 
+.DS_Store
+
+# gradle
+build 
+.gradle 
+.gradletasknamecache 
+target 
+.dockerignore 
+dump.rdb
